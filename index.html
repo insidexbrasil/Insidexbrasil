@@ -2,38 +2,49 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login - Insidex</title>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
   <style>
     body {
-      margin: 0;
-      background-color: #0f0f0f;
+      background-color: #000;
       color: #fff;
       font-family: Arial, sans-serif;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
+      margin: 0;
     }
-    .btn {
+    .login-box {
+      background-color: #111;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 0 20px #00ffb7;
+    }
+    button {
+      padding: 10px 20px;
       background-color: #00ffb7;
       border: none;
-      padding: 15px 30px;
+      border-radius: 5px;
       font-size: 16px;
-      border-radius: 8px;
-      cursor: pointer;
       color: #000;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <h1>Bem-vindo à Insidex</h1>
-  <button class="btn" onclick="login()">Login com Google</button>
+  <div class="login-box">
+    <h1>Login com Google</h1>
+    <button id="loginBtn">Entrar com Google</button>
+  </div>
+
+  <!-- Firebase CDN -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
 
   <script>
+    // Configuração Firebase da Insidex
     const firebaseConfig = {
       apiKey: "AIzaSyBxtvz8KqN5knzovcYRHdXxMtcUDhDYI1g",
       authDomain: "insidexbr.firebaseapp.com",
@@ -42,14 +53,22 @@
       messagingSenderId: "166788819502",
       appId: "1:166788819502:web:b9d4135d4693a2f5eb8dbf"
     };
+
     firebase.initializeApp(firebaseConfig);
 
-    function login() {
-      const provider = new firebase.auth.GoogleAuthProvider();
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    document.getElementById("loginBtn").addEventListener("click", () => {
       firebase.auth().signInWithPopup(provider)
-        .then(() => window.location.href = "dash.html")
-        .catch(error => alert("Erro no login: " + error.message));
-    }
+        .then((result) => {
+          const user = result.user;
+          localStorage.setItem("insidexUser", user.uid);
+          window.location.href = "dashboard.html"; // redireciona para o dashboard
+        })
+        .catch((error) => {
+          alert("Erro no login: " + error.message);
+        });
+    });
   </script>
 </body>
 </html>
