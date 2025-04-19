@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Insidex</title>
+  <style>
+    body {
+      background-color: #0f0f0f;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .saldo {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .btn {
+      background-color: #00ffb7;
+      border: none;
+      padding: 10px 20px;
+      font-size: 18px;
+      border-radius: 8px;
+      color: black;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="saldo">Saldo: <span id="saldo">0.00</span> ITX</div>
+  <button class="btn" onclick="realizarTarefa()">Realizar Tarefa</button>
+
+  <script>
+    const userId = localStorage.getItem("userId") || (localStorage.setItem("userId", "user_" + Date.now()), localStorage.getItem("userId"));
+    const saldoKey = "saldo_" + userId;
+    const saldoAtual = parseFloat(localStorage.getItem(saldoKey) || "0");
+    document.getElementById("saldo").textContent = saldoAtual.toFixed(3);
+
+    function realizarTarefa() {
+      window.location.href = "confirmar.html";
+    }
+  </script>
+</body>
+</html>

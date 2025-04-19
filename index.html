@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Insidex</title>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background-color: #0f0f0f;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .btn {
+      background-color: #00ffb7;
+      border: none;
+      padding: 15px 30px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bem-vindo à Insidex</h1>
+  <button class="btn" onclick="login()">Login com Google</button>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBxtvz8KqN5knzovcYRHdXxMtcUDhDYI1g",
+      authDomain: "insidexbr.firebaseapp.com",
+      projectId: "insidexbr",
+      storageBucket: "insidexbr.appspot.com",
+      messagingSenderId: "166788819502",
+      appId: "1:166788819502:web:b9d4135d4693a2f5eb8dbf"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    function login() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      firebase.auth().signInWithPopup(provider)
+        .then(() => window.location.href = "dash.html")
+        .catch(error => alert("Erro no login: " + error.message));
+    }
+  </script>
+</body>
+</html>

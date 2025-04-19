@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Confirmar Tarefa</title>
+  <style>
+    body {
+      background-color: #0f0f0f;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .btn {
+      background-color: #00ffb7;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      color: black;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>Confirme sua tarefa</h2>
+  <button class="btn" onclick="confirmarTarefa()">Confirmar</button>
+
+  <script>
+    const userId = localStorage.getItem("userId");
+    const saldoKey = "saldo_" + userId;
+    let saldo = parseFloat(localStorage.getItem(saldoKey) || "0");
+    function confirmarTarefa() {
+      saldo += 0.04;
+      localStorage.setItem(saldoKey, saldo.toFixed(3));
+      window.location.href = "dash.html";
+    }
+  </script>
+</body>
+</html>
