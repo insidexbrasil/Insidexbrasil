@@ -63,7 +63,7 @@
         .then((result) => {
           const user = result.user;
           localStorage.setItem("insidexUser", user.uid);
-          window.location.href = "dashboard.html"; // redireciona para o dashboard
+          window.location.href = "das.html"; // redireciona para o dashboard
         })
         .catch((error) => {
           alert("Erro no login: " + error.message);
